@@ -16,13 +16,13 @@ public class BioServerHandler extends ChannelAdapter {
 
     @Override
     public void channelActive(ChannelHandler ctx) {
-        log.info("BioServerHandler. socket localAddress={}", ctx.getSocket().getLocalAddress());
+        log.info("Hi, server accepted connection. socket localAddress={}", ctx.getSocket().getLocalAddress());
         ctx.writeAndFlush("Hi, server accepted connection.");
     }
 
     @Override
     public void channelRead(ChannelHandler ctx, Object msg) {
-        log.info("接收到消息：{}", msg);
-        ctx.writeAndFlush("Hi, server received message: " + msg);
+        log.info("The server has received this message: {}", msg);
+        ctx.writeAndFlush("The server has received this message: " + msg);
     }
 }

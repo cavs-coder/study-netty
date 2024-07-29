@@ -11,9 +11,10 @@ import java.nio.charset.Charset;
 
 @Slf4j
 public abstract class ChannelAdapter extends Thread {
+
     private Socket socket;
-    private ChannelHandler channelHandler;
     private Charset charset;
+    private ChannelHandler channelHandler;
 
     public ChannelAdapter(Socket socket, Charset charset) {
         this.socket = socket;
