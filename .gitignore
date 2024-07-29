@@ -24,3 +24,5 @@
 hs_err_pid*
 replay_pid*
 /.idea/
+/study-netty-1-00/study-netty-1-00.iml
+study-netty.iml
