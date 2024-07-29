@@ -46,8 +46,11 @@ public abstract class ChannelAdapter extends Thread {
     public void run() {
         while (true) {
             try {
-                // 选择一组准备进行I/O操作的通道
-                selector.select(1000);
+                // 当调用 select(1000) 时，Selector 会阻塞最多1000毫秒，等待至少一个通道准备好进行I/O操作。
+                // 在这期间，如果有任何注册在 Selector 上的通道发生了指定的I/O事件（如读就绪、写就绪等），
+                // select() 方法会立即返回，并且 Selector 的 selectedKeys() 方法将返回一个包含准备好的通道对应的 SelectionKey 集合
+                int usableSelectorCount = selector.select(1000);
+                log.info("usableSelectorCount = {}", usableSelectorCount);
 
                 // 获取已选择的键集合
                 Set<SelectionKey> selectedKeys = selector.selectedKeys();
