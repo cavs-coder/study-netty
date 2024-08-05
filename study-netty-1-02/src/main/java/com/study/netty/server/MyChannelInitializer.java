@@ -9,9 +9,6 @@ import io.netty.channel.socket.SocketChannel;
  */
 public class MyChannelInitializer extends ChannelInitializer<SocketChannel> {
 
-    /**
-     * 有新的客户端连接时，netty会调用这个方法，可以在这时候对
-     */
     @Override
     protected void initChannel(SocketChannel channel) throws Exception {
         System.out.println("链接报告开始");
@@ -19,5 +16,8 @@ public class MyChannelInitializer extends ChannelInitializer<SocketChannel> {
         System.out.println("链接报告IP:" + channel.remoteAddress().getHostString());
         System.out.println("链接报告Port:" + channel.remoteAddress().getPort());
         System.out.println("链接报告完毕");
+
+        //在管道中添加我们自己的接收数据实现方法
+        channel.pipeline().addLast(new MyServerHandler());
     }
 }
