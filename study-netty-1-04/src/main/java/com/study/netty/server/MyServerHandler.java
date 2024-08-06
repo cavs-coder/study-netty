@@ -16,6 +16,9 @@ import java.util.Date;
 @Slf4j
 public class MyServerHandler extends ChannelInboundHandlerAdapter {
 
+    /**
+     * 当客户端主动连接服务端后，这个通道就是活跃的了。也就是客户端与服务端建立了通信通道并且可以传输数据
+     */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         SocketChannel channel = (SocketChannel) ctx.channel();
@@ -33,7 +36,7 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
     }
 
     /**
-     * 当客户端主动断开服务端的链接后，这个通道就是不活跃的。也就是说客户端与服务端的关闭了通信通道并且不可以传输数据
+     * 当客户端主动断开服务端的连接后，这个通道就是不活跃的。也就是说客户端与服务端的关闭了通信通道并且不可以传输数据
      */
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {

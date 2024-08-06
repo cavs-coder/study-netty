@@ -1,4 +1,4 @@
-package com.study.netty.server;
+package com.study.netty.client;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -9,25 +9,26 @@ import java.util.Date;
 
 /**
  * @author fuguangwei
- * @date 2024-08-05
+ * @date 2024-08-06
  */
 @Slf4j
-public class MyServerHandler extends ChannelInboundHandlerAdapter {
+public class MyClientHandler extends ChannelInboundHandlerAdapter {
 
     /**
      * 当客户端主动连接服务端后，这个通道就是活跃的了。也就是客户端与服务端建立了通信通道并且可以传输数据
      */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        //日志信息
         SocketChannel channel = (SocketChannel) ctx.channel();
         log.info("连接报告开始");
         log.info("连接报告信息：有一客户端连接到本服务端");
-        log.info("连接报告IP：{}" , channel.remoteAddress().getHostString());
-        log.info("连接报告Port：{}" , channel.remoteAddress().getPort());
+        log.info("连接报告IP：{}", channel.remoteAddress().getHostString());
+        log.info("连接报告Port：{}", channel.remoteAddress().getPort());
         log.info("连接报告完毕");
 
-        //通知客户端，连接建立成功
-        String str = String.format("通知客户端，连接建立成功：%s %s", new Date(), channel.localAddress().getHostString());
+        //通知服务端，连接建立成功
+        String str = String.format("通知服务端，连接建立成功：%s %s", new Date(), channel.localAddress().getHostString());
         ctx.writeAndFlush(str);
     }
 
@@ -36,7 +37,7 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        log.info("客户端断开连接");
+        log.info("服务端断开连接");
     }
 
     @Override
@@ -44,7 +45,7 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
         log.info("接收到消息：{}", msg);
 
         //通知客户端，消息发送成功
-        String str = String.format("通知客户端，消息发送成功：%s，服务端接收到消息：%s", new Date(), msg);
+        String str = String.format("通知服务端，消息发送成功：%s，客户端接收到消息：%s", new Date(), msg);
         ctx.writeAndFlush(str);
     }
 

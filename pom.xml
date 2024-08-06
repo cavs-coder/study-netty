@@ -22,6 +22,7 @@
         <module>study-netty-1-05</module>
         <module>study-netty-1-06</module>
         <module>study-netty-1-07</module>
+        <module>study-netty-1-08</module>
     </modules>
 
     <dependencies>

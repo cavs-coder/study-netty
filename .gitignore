@@ -26,3 +26,4 @@ replay_pid*
 /.idea/
 /study-netty-1-00/study-netty-1-00.iml
 study-netty.iml
+/study-netty-1-08/target/classes/logback.xml

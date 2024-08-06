@@ -1,0 +1,25 @@
+<configuration>
+    <!--格式化输出：
+        %d表示日期，
+        %thread表示线程名，
+        %-5level：级别从左显示5个字符宽度，
+        %logger{50} 表示logger名字最长50个字符，否则按照句点分割。
+        %msg：日志消息，
+        %n是换行符
+    -->
+    <property name="LOG_PATTERN"
+              value="[%yellow(%d{yyyy-MM-dd HH:mm:ss.SSS})] [%-5level][%thread] [%logger{36}:%line] : %msg%n" />
+
+    <!-- 控制台输出 -->
+    <appender class="ch.qos.logback.core.ConsoleAppender" name="STDOUT">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <!-- 控制台也要使用UTF-8，不要使用GBK，否则会中文乱码 -->
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
