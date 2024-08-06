@@ -20,6 +20,7 @@
         <module>study-netty-1-03</module>
         <module>study-netty-1-04</module>
         <module>study-netty-1-05</module>
+        <module>study-netty-1-06</module>
     </modules>
 
     <dependencies>
