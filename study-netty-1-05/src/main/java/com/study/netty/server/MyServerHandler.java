@@ -1,7 +1,5 @@
 package com.study.netty.server;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.socket.SocketChannel;
@@ -27,9 +25,7 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
 
         //通知客户端，连接建立成功
         String str = String.format("通知客户端，连接建立成功：%s %s", new Date(), channel.localAddress().getHostString());
-        ByteBuf buf = Unpooled.buffer(str.getBytes().length);
-        buf.writeBytes(str.getBytes("GBK"));
-        ctx.writeAndFlush(buf);
+        ctx.writeAndFlush(str);
     }
 
     /**
@@ -42,14 +38,11 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        //因为 MyChannelInitializer 的 initChannel 已经解码过了，所以可以直接使用
         log.info("接收到消息：{}", msg);
 
         //通知客户端，消息发送成功
         String str = String.format("通知客户端，消息发送成功：%s，服务端接收到消息：%s", new Date(), msg);
-        ByteBuf buf = Unpooled.buffer(str.getBytes().length);
-        buf.writeBytes(str.getBytes("GBK"));
-        ctx.writeAndFlush(buf);
+        ctx.writeAndFlush(str);
     }
 
     /**
